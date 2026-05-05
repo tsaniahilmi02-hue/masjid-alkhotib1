@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masjid Al-Khotib Kediri — Pusat Ibadah & Dakwah</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ───────────────────────────────────────────────── */
+:root {
+  --g1: #0a1f14;  --g2: #102b1c;  --g3: #1a4230;
+  --g4: #236947;  --g5: #2d8a5e;
+  --gd: #1a3a2a;
+  --au: #c9993a;  --al: #e4bf6a;  --ah: #f5d990;
+  --cr: #f8f2e0;  --wh: #ffffff;
+  --t1: #0f1a13;  --t2: #3a4a3e;  --t3: #7a8c80;
+  --rs: 0 20px 60px rgba(0,0,0,.18);
+  --rm: 0 8px 32px rgba(0,0,0,.12);
+  --rx: 18px;
+  --font-head: 'Cinzel', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-arabic: 'Noto Naskh Arabic', serif;
+  --font-serif: 'Cormorant Garamond', serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--cr);color:var(--t1);overflow-x:hidden}
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--g1)}
+::-webkit-scrollbar-thumb{background:var(--au);border-radius:3px}
+
+/* ─── LOADER ─────────────────────────────────────────────────── */
+#loader{
+  position:fixed;inset:0;background:var(--g1);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  transition:opacity .6s,visibility .6s;
+}
+#loader.hidden{opacity:0;visibility:hidden}
+.loader-crescent{
+  width:64px;height:64px;border:3px solid transparent;
+  border-top-color:var(--au);border-right-color:var(--al);
+  border-radius:50%;animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{font-family:var(--font-head);color:var(--al);font-size:.85rem;letter-spacing:4px;text-transform:uppercase}
+
+/* ─── PROGRESS BAR ───────────────────────────────────────────── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--au),var(--al));z-index:2000;
+  transition:width .1s;
+}
+
+/* ─── ANNOUNCEMENT TICKER ────────────────────────────────────── */
+.ticker-wrap{
+  background:linear-gradient(90deg,var(--g1),var(--g2));
+  border-bottom:1px solid rgba(201,153,58,.25);
+  overflow:hidden;padding:10px 0;
+}
+.ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap}
+.ticker-label{
+  background:var(--au);color:var(--g1);font-family:var(--font-head);
+  font-size:.72rem;font-weight:700;letter-spacing:2px;padding:4px 16px;
+  text-transform:uppercase;flex-shrink:0;margin-right:20px;
+}
+.ticker-track{
+  display:inline-flex;gap:60px;animation:ticker 30s linear infinite;
+}
+.ticker-track span{color:rgba(255,255,255,.75);font-size:.82rem;letter-spacing:.5px}
+.ticker-track span i{color:var(--al);margin-right:6px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─── NAVBAR ─────────────────────────────────────────────────── */
+.header{
+  position:fixed;top:36px;left:0;right:0;z-index:1000;
+  transition:top .3s,background .3s;
+}
+.header.scrolled{
+  top:0;
+  background:rgba(10,31,20,.96);
+  backdrop-filter:blur(16px);
+  box-shadow:0 2px 30px rgba(0,0,0,.4);
+}
+.nav-container{
+  max-width:1280px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;height:72px;
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  color:var(--al);font-family:var(--font-head);
+  font-size:1.1rem;font-weight:700;text-decoration:none;letter-spacing:.5px;
+}
+.logo-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--au),var(--al));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--g1);flex-shrink:0;
+}
+.logo-sub{font-size:.65rem;color:rgba(255,255,255,.45);font-family:var(--font-body);font-weight:400;letter-spacing:1px;display:block;margin-top:1px}
+.nav-menu{display:flex;list-style:none;gap:2px;align-items:center}
+.nav-link{
+  color:rgba(255,255,255,.75);text-decoration:none;
+  padding:9px 14px;border-radius:8px;font-size:.83rem;
+  font-weight:500;transition:all .2s;white-space:nowrap;letter-spacing:.3px;
+}
+.nav-link:hover,.nav-link.active{color:var(--al);background:rgba(201,153,58,.12)}
+.nav-btn{
+  background:linear-gradient(135deg,var(--au),var(--al));
+  color:var(--g1)!important;font-weight:700!important;border-radius:50px;
+  padding:9px 20px!important;font-size:.82rem!important;
+}
+.nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,153,58,.4);background:linear-gradient(135deg,var(--au),var(--al))!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:26px;height:2px;background:var(--al);border-radius:2px;transition:all .3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:1020px){
+  .hamburger{display:flex}
+  .nav-menu{
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(10,31,20,.98);backdrop-filter:blur(20px);
+    flex-direction:column;padding:100px 40px 40px;
+    gap:6px;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+    align-items:flex-start;overflow-y:auto;
+  }
+  .nav-menu.open{transform:translateX(0)}
+  .nav-menu li{width:100%}
+  .nav-link{display:block;padding:14px 16px;font-size:1.05rem}
+  .header{top:0}
+  .header.scrolled{top:0}
+}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  background-image:url('Foto Masjid11.jpeg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(10,81,42,.85) 0%,rgba(10,81,42,.55) 35%,rgba(10,81,42,0) 55%);
+  pointer-events:none;
+}
+/* Animated geometric background */
+.hero-geo{position:absolute;inset:0;overflow:hidden}
+.geo-ring{
+  position:absolute;border:1px solid rgba(201,153,58,.12);border-radius:50%;
+  animation:pulse-ring 6s ease-in-out infinite;
+}
+.geo-ring:nth-child(1){width:600px;height:600px;top:50%;left:60%;transform:translate(-50%,-50%)}
+.geo-ring:nth-child(2){width:800px;height:800px;top:50%;left:60%;transform:translate(-50%,-50%);animation-delay:1s;border-color:rgba(201,153,58,.07)}
+.geo-ring:nth-child(3){width:1000px;height:1000px;top:50%;left:60%;transform:translate(-50%,-50%);animation-delay:2s;border-color:rgba(201,153,58,.04)}
+@keyframes pulse-ring{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.03)}}
+
+/* Islamic pattern overlay */
+.hero-pattern{
+  position:absolute;inset:0;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9993a' fill-rule='evenodd'%3E%3Cpath d='M40 0l5.7 17.7H64L49.2 28.6l5.7 17.7L40 35.4 25.1 46.3l5.7-17.7L16 17.7h18.3z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-gradient{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(10,31,20,.6) 0%,rgba(10,31,20,.1) 100%);
+}
+.hero-inner{
+  position:relative;z-index:2;max-width:1280px;margin:0 auto;
+  width:100%;padding:120px 28px 80px;
+  display:grid;grid-template-columns:50% 50%;gap:60px;align-items:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,153,58,.12);border:1px solid rgba(201,153,58,.3);
+  border-radius:50px;padding:6px 16px;margin-bottom:24px;
+}
+.hero-eyebrow span{color:var(--al);font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.hero-eyebrow i{color:var(--au);font-size:.75rem}
+.hero-arabic{
+  font-family:var(--font-arabic);font-size:clamp(1.2rem,2.5vw,1.6rem);
+  color:rgba(201,153,58,.7);margin-bottom:12px;direction:rtl;
+  letter-spacing:1px;
+}
+.hero-title{
+  font-family:var(--font-head);font-size:clamp(2.2rem,4vw,3.8rem);
+  color:var(--wh);line-height:1.1;margin-bottom:8px;letter-spacing:-.5px;
+}
+.hero-title .accent{
+  display:block;color:transparent;
+  background:linear-gradient(135deg,var(--au),var(--ah));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-tagline{
+  font-family:var(--font-serif);font-size:clamp(1rem,2vw,1.3rem);font-style:italic;
+  color:rgba(255,255,255,.55);margin-bottom:28px;
+}
+.hero-desc{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:36px;max-width:520px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;padding:14px 28px;
+  border-radius:50px;font-family:var(--font-body);font-size:.88rem;font-weight:600;
+  text-decoration:none;cursor:pointer;border:none;transition:all .25s;letter-spacing:.3px;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--au),#e8b847);
+  color:var(--g1);box-shadow:0 6px 24px rgba(201,153,58,.35);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(201,153,58,.5)}
+.btn-outline{
+  background:transparent;color:var(--wh);
+  border:1.5px solid rgba(255,255,255,.3);
+}
+.btn-outline:hover{border-color:var(--al);color:var(--al);background:rgba(201,153,58,.08)}
+.btn-green{
+  background:linear-gradient(135deg,var(--g4),var(--g5));
+  color:var(--wh);box-shadow:0 6px 24px rgba(45,138,94,.3);
+}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(45,138,94,.45)}
+
+/* Hero prayer strip */
+.hero-prayer-strip{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.prayer-chip{
+  background:rgba(255,255,255,.06);border:1px solid rgba(201,153,58,.2);
+  border-radius:10px;padding:10px 16px;text-align:center;
+  backdrop-filter:blur(6px);transition:all .2s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.prayer-chip.next-prayer{
+  border-color:var(--au);background:rgba(201,153,58,.12);
+}
+.prayer-chip.next-prayer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--au),var(--al));
+}
+.prayer-name{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;display:block}
+.prayer-time{font-family:var(--font-head);font-size:1.1rem;color:var(--wh);display:block;margin-top:2px}
+.prayer-chip.next-prayer .prayer-name{color:var(--al)}
+.prayer-chip.next-prayer .prayer-time{color:var(--al)}
+.prayer-countdown{font-size:.68rem;color:rgba(201,153,58,.7);display:block;margin-top:2px}
+
+/* Hero visual */
+.hero-visual{display:flex;justify-content:center;align-items:center;min-height:520px;position:relative}
+
+.live-clock-card{
+  width:100%;max-width:340px;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);
+  border-radius:20px;padding:22px 28px;backdrop-filter:blur(16px);
+  text-align:center;color:var(--wh);
+  box-shadow:0 24px 80px rgba(0,0,0,.25);
+}
+.live-clock-card .date-label{font-size:.75rem;color:rgba(255,255,255,.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.live-clock-card .time-display{font-family:var(--font-head);font-size:2.6rem;color:var(--al);letter-spacing:2px}
+.live-clock-card .hijri-date{font-size:.82rem;color:rgba(255,255,255,.75);margin-top:6px;font-family:var(--font-arabic)}
+.live-clock-card .gregorian-date{font-size:.8rem;color:rgba(255,255,255,.65);margin-top:2px}
+
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{height:520px;min-height:420px}
+  .live-clock-card{width:calc(100% - 32px);max-width:280px;bottom:18px}
+}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-visual{display:none}
+}
+
+/* Live clock card */
+.live-clock-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(201,153,58,.2);
+  border-radius:16px;padding:20px 28px;backdrop-filter:blur(8px);
+  text-align:center;width:100%;max-width:320px;
+}
+.live-clock-card .date-label{font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.live-clock-card .time-display{font-family:var(--font-head);font-size:2.4rem;color:var(--al);letter-spacing:2px}
+.live-clock-card .hijri-date{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:6px;font-family:var(--font-arabic)}
+.live-clock-card .gregorian-date{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:2px}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-visual{display:none}
+}
+
+/* ─── SECTION BASE ───────────────────────────────────────────── */
+section{padding:90px 28px}
+.container{max-width:1280px;margin:0 auto}
+.section-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(45,138,94,.1);border:1px solid rgba(45,138,94,.25);
+  border-radius:50px;padding:5px 14px;margin-bottom:14px;
+}
+.section-badge span{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g4)}
+.section-title{
+  font-family:var(--font-head);font-size:clamp(1.7rem,3vw,2.5rem);
+  color:var(--g1);margin-bottom:16px;letter-spacing:-.3px;
+}
+.section-title.light{color:var(--wh)}
+.section-title .gold{color:var(--au)}
+.section-lead{font-size:1.05rem;color:var(--t2);line-height:1.8;max-width:600px}
+.section-divider{
+  width:48px;height:3px;background:linear-gradient(90deg,var(--au),var(--al));
+  border-radius:2px;margin:16px 0 40px;
+}
+.section-divider.center{margin:16px auto 40px}
+.text-center{text-align:center}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ─── QURAN VERSE BANNER ─────────────────────────────────────── */
+.verse-banner{
+  background:linear-gradient(135deg,var(--g1) 0%,var(--g2) 50%,#1b3a28 100%);
+  padding:60px 28px;position:relative;overflow:hidden;
+}
+.verse-banner::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9993a' fill-opacity='0.04'%3E%3Cpath d='M30 0l3.4 10.6H44L35.3 17.2l3.4 10.6L30 21.2l-8.7 6.6 3.4-10.6L16 10.6h10.6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.verse-inner{max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.verse-deco{color:var(--au);font-size:2rem;margin-bottom:16px;opacity:.6}
+.verse-arabic{
+  font-family:var(--font-arabic);font-size:clamp(1.6rem,3.5vw,2.4rem);
+  color:var(--al);direction:rtl;line-height:2;margin-bottom:20px;
+}
+.verse-translation{
+  font-family:var(--font-serif);font-style:italic;
+  font-size:clamp(1rem,2vw,1.25rem);color:rgba(255,255,255,.7);
+  line-height:1.8;margin-bottom:14px;
+}
+.verse-source{font-size:.8rem;color:var(--au);letter-spacing:2px;text-transform:uppercase}
+
+/* ─── PROFIL ─────────────────────────────────────────────────── */
+.profil{background:var(--wh)}
+.profil-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.profil-text p{font-size:.98rem;line-height:1.9;color:var(--t2);margin-bottom:16px}
+.profil-values{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.value-card{
+  background:var(--cr);border-radius:12px;padding:18px;
+  border-left:3px solid var(--au);
+}
+.value-card i{color:var(--g4);font-size:1.1rem;margin-bottom:8px}
+.value-card h4{font-family:var(--font-head);font-size:.8rem;color:var(--g1);letter-spacing:.5px;margin-bottom:5px}
+.value-card p{font-size:.82rem;color:var(--t2);line-height:1.5}
+.profil-stats{display:flex;flex-direction:column;gap:20px}
+.stat-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.stat-card{
+  background:var(--cr);border-radius:14px;padding:24px;
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--au),var(--al));
+}
+.stat-num{
+  font-family:var(--font-head);font-size:2.2rem;
+  color:var(--g1);display:block;line-height:1;
+}
+.stat-lbl{font-size:.78rem;color:var(--t3);margin-top:6px;display:block;text-transform:uppercase;letter-spacing:.5px}
+.imam-card{
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  border-radius:14px;padding:24px;display:flex;align-items:center;gap:16px;
+}
+.imam-avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--au),var(--al));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;color:var(--g1);flex-shrink:0;
+}
+.imam-info h4{font-family:var(--font-head);color:var(--al);font-size:.9rem;margin-bottom:3px}
+.imam-info p{font-size:.8rem;color:rgba(255,255,255,.55)}
+.imam-info span{font-size:.72rem;color:var(--au);letter-spacing:1px;text-transform:uppercase}
+@media(max-width:860px){
+  .profil-layout{grid-template-columns:1fr;gap:40px}
+  .profil-values,.stat-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .profil-values{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+}
+
+/* ─── JADWAL & LOKASI ────────────────────────────────────────── */
+.jadwal-section{
+  background:linear-gradient(160deg,var(--g1) 0%,#132b1d 100%);
+  position:relative;overflow:hidden;
+}
+.jadwal-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9993a' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Ccircle cx='40' cy='40' r='35'/%3E%3C/g%3E%3C/svg%3E");
+}
+.jadwal-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+}
+@media(max-width:860px){.jadwal-grid{grid-template-columns:1fr}}
+
+/* Prayer schedule card */
+.sholat-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(201,153,58,.2);
+  border-radius:var(--rx);overflow:hidden;
+}
+.sholat-card-header{
+  background:linear-gradient(135deg,var(--g3),var(--g4));
+  padding:22px 26px;display:flex;justify-content:space-between;align-items:center;
+}
+.sholat-card-header h3{font-family:var(--font-head);color:var(--wh);font-size:1rem;letter-spacing:.5px}
+.sholat-date-badge{
+  background:rgba(255,255,255,.12);border-radius:8px;padding:6px 12px;
+  font-size:.78rem;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:6px;
+}
+.sholat-date-badge i{color:var(--al)}
+.sholat-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 26px;border-bottom:1px solid rgba(255,255,255,.05);
+  transition:background .2s;position:relative;
+}
+.sholat-row:last-child{border-bottom:none}
+.sholat-row:hover{background:rgba(201,153,58,.06)}
+.sholat-row.active{
+  background:rgba(201,153,58,.1);
+}
+.sholat-row.active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--au),var(--al));
+}
+.sholat-row-left{display:flex;align-items:center;gap:12px}
+.sholat-icon{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;color:var(--al);
+}
+.sholat-row.active .sholat-icon{background:rgba(201,153,58,.2)}
+.sholat-row-name{color:rgba(255,255,255,.85);font-size:.92rem;font-weight:500}
+.sholat-row.active .sholat-row-name{color:var(--al);font-weight:600}
+.sholat-row-arabic{font-family:var(--font-arabic);color:rgba(255,255,255,.3);font-size:.8rem;display:block;margin-top:1px}
+.sholat-time{font-family:var(--font-head);color:var(--wh);font-size:1.15rem;letter-spacing:1px}
+.sholat-row.active .sholat-time{color:var(--al)}
+.active-badge{
+  background:var(--au);color:var(--g1);font-size:.66rem;font-weight:700;
+  letter-spacing:1px;padding:2px 8px;border-radius:20px;text-transform:uppercase;
+  margin-left:8px;animation:badge-pulse 2s ease-in-out infinite;
+}
+@keyframes badge-pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.next-countdown{
+  font-size:.75rem;color:rgba(201,153,58,.7);margin-top:2px;display:block;
+}
+.sholat-footer{
+  background:rgba(0,0,0,.2);padding:12px 26px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.78rem;color:rgba(255,255,255,.35);
+}
+.sholat-footer span i{color:var(--au);margin-right:5px}
+
+/* Maps card */
+.maps-card-new{
+  background:rgba(255,255,255,.05);border:1px solid rgba(201,153,58,.2);
+  border-radius:var(--rx);overflow:hidden;display:flex;flex-direction:column;
+}
+.maps-card-header-new{
+  background:linear-gradient(135deg,var(--g3),var(--g4));
+  padding:22px 26px;
+}
+.maps-card-header-new h3{font-family:var(--font-head);color:var(--wh);font-size:1rem;letter-spacing:.5px;margin-bottom:6px}
+.maps-addr{font-size:.85rem;color:rgba(255,255,255,.65);display:flex;align-items:flex-start;gap:8px;line-height:1.6}
+.maps-addr i{color:var(--au);margin-top:2px;flex-shrink:0}
+.maps-card-new iframe{flex:1;width:100%;height:280px;border:none;display:block;filter:brightness(.9) contrast(1.05)}
+.maps-actions{
+  padding:14px 20px;display:flex;gap:10px;flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.map-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:8px;font-size:.8rem;font-weight:600;
+  text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:var(--font-body);
+}
+.map-btn-primary{background:var(--au);color:var(--g1)}
+.map-btn-primary:hover{background:var(--al)}
+.map-btn-secondary{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)}
+.map-btn-secondary:hover{background:rgba(255,255,255,.13)}
+
+/* ─── KEGIATAN / KAJIAN ──────────────────────────────────────── */
+.kegiatan{background:var(--cr)}
+.kegiatan-tabs{
+  display:flex;gap:8px;margin-bottom:36px;border-bottom:2px solid #e8e4d8;
+  flex-wrap:wrap;
+}
+.ktab{
+  padding:10px 20px;font-size:.85rem;font-weight:600;color:var(--t3);
+  cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;
+  transition:all .2s;letter-spacing:.3px;
+}
+.ktab.active,.ktab:hover{color:var(--g3);border-bottom-color:var(--g4)}
+.kegiatan-panel{display:none}
+.kegiatan-panel.active{display:block}
+.kegiatan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.kegiatan-card{
+  background:var(--wh);border-radius:var(--rx);overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;
+}
+.kegiatan-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
+.kcard-thumb{width:100%;height:180px;overflow:hidden}
+.kcard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.kcard-top{
+  padding:24px 24px 0;display:flex;justify-content:space-between;align-items:flex-start;
+}
+.kcard-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.kcard-icon.green{background:rgba(45,138,94,.12);color:var(--g4)}
+.kcard-icon.gold{background:rgba(201,153,58,.12);color:var(--au)}
+.kcard-icon.blue{background:rgba(59,130,246,.1);color:#3b82f6}
+.kcard-icon.purple{background:rgba(139,92,246,.1);color:#8b5cf6}
+.kcard-badge{
+  padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:700;
+}
+.badge-harian{background:rgba(45,138,94,.12);color:var(--g4)}
+.badge-mingguan{background:rgba(201,153,58,.12);color:#8a6820}
+.badge-bulanan{background:rgba(59,130,246,.1);color:#3b82f6}
+.kcard-body{padding:16px 24px 20px}
+.kcard-body h3{font-family:var(--font-head);font-size:.95rem;color:var(--g1);margin-bottom:8px;line-height:1.4;letter-spacing:.3px}
+.kcard-body p{font-size:.85rem;color:var(--t2);line-height:1.65;margin-bottom:14px}
+.kcard-meta{display:flex;flex-direction:column;gap:5px}
+.kcard-meta span{font-size:.8rem;color:var(--t3);display:flex;align-items:center;gap:7px}
+.kcard-meta span i{color:var(--g5);width:14px;text-align:center}
+.kcard-footer{
+  padding:14px 24px;border-top:1px solid #f0ece2;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.kcard-ustadz{font-size:.8rem;color:var(--t2);display:flex;align-items:center;gap:7px}
+.kcard-ustadz i{color:var(--au)}
+.kcard-link{font-size:.8rem;color:var(--g4);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:5px}
+.kcard-link:hover{color:var(--g1)}
+
+/* ─── GALERI ─────────────────────────────────────────────────── */
+.galeri{background:var(--wh)}
+.galeri-grid-new{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:200px 200px;
+  gap:12px;
+}
+.gi{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--g2)}
+.gi:nth-child(1){grid-column:span 5;grid-row:span 2}
+.gi:nth-child(2){grid-column:span 4;grid-row:span 1}
+.gi:nth-child(3){grid-column:span 3;grid-row:span 1}
+.gi:nth-child(4){grid-column:span 3;grid-row:span 1}
+.gi:nth-child(5){grid-column:span 4;grid-row:span 1}
+.gi-inner{width:100%;height:100%;transition:transform .5s}
+.gi-inner img{width:100%;height:100%;object-fit:cover;display:block}
+.gi:hover .gi-inner{transform:scale(1.08)}
+.gi-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,31,20,.9) 0%,transparent 50%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:16px;
+  opacity:0;transition:opacity .35s;
+}
+.gi:hover .gi-overlay{opacity:1}
+.gi-overlay h4{font-family:var(--font-head);color:var(--al);font-size:.85rem;letter-spacing:.5px;margin-bottom:3px}
+.gi-overlay span{font-size:.75rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:5px}
+.gi-overlay span i{color:var(--au)}
+.gi-view-btn{
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,.5);color:var(--wh);
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;opacity:0;transition:opacity .3s;
+}
+.gi:hover .gi-view-btn{opacity:1}
+@media(max-width:768px){
+  .galeri-grid-new{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto;
+  }
+  .gi{grid-column:span 1!important;grid-row:span 1!important;height:140px}
+  .gi:nth-child(1){grid-column:span 2!important}
+}
+
+/* Lightbox */
+#lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;
+  display:none;align-items:center;justify-content:center;
+}
+#lightbox.active{display:flex}
+#lightbox-img{max-width:90vw;max-height:85vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lightbox-close{
+  position:absolute;top:24px;right:28px;color:var(--wh);
+  font-size:1.8rem;cursor:pointer;width:44px;height:44px;
+  border-radius:50%;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+#lightbox-close:hover{background:rgba(255,255,255,.2)}
+
+/* ─── DONASI ─────────────────────────────────────────────────── */
+.donasi{background:var(--cr)}
+.donasi-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.donasi-info h3{font-family:var(--font-head);font-size:1.4rem;color:var(--g1);margin-bottom:18px;letter-spacing:.3px}
+.donasi-info p{font-size:.93rem;color:var(--t2);line-height:1.85;margin-bottom:22px}
+.donasi-program{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.program-item{
+  background:var(--wh);border-radius:12px;padding:16px 20px;
+  display:flex;gap:14px;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.program-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,var(--g3),var(--g4));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--wh);font-size:1rem;flex-shrink:0;
+}
+.program-info h4{font-size:.9rem;font-weight:600;color:var(--g1);margin-bottom:2px}
+.program-info p{font-size:.78rem;color:var(--t3);margin:0}
+.program-progress{height:4px;background:#e8e4d8;border-radius:2px;margin-top:8px;overflow:hidden}
+.program-bar{height:100%;background:linear-gradient(90deg,var(--g4),var(--g5));border-radius:2px;transition:width 1.5s ease}
+.program-pct{font-size:.72rem;color:var(--g4);font-weight:700;margin-top:3px}
+.rekening-cards{display:flex;flex-direction:column;gap:10px}
+.rekening-card{
+  background:var(--wh);border-radius:12px;padding:16px 20px;
+  border-left:3px solid var(--au);display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.rekening-card + .qris-card{
+  flex-direction:column;align-items:flex-start;gap:14px;
+}
+.qris-card{
+  background:var(--wh);border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;
+  border:1px solid rgba(45,138,94,.12);box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.qris-card img{width:260px;max-width:100%;height:auto;border-radius:12px;border:1px solid rgba(0,0,0,.08);background:#fff}
+.qris-card .qris-label{font-size:.8rem;font-weight:700;color:var(--g1);text-transform:uppercase;letter-spacing:.2em}
+.qris-card span{font-size:.82rem;color:var(--t2);text-align:center;max-width:260px;}
+.rek-left small{font-size:.72rem;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px}
+.rek-left strong{font-size:.95rem;color:var(--g1)}
+.copy-btn{
+  background:rgba(45,106,79,.1);color:var(--g4);border:none;
+  padding:7px 13px;border-radius:8px;font-size:.75rem;font-weight:600;
+  cursor:pointer;transition:all .2s;font-family:var(--font-body);
+  display:flex;align-items:center;gap:5px;
+}
+.copy-btn:hover{background:rgba(45,106,79,.2)}
+.copy-btn.copied{background:var(--g4);color:var(--wh)}
+.donasi-form-card{background:var(--wh);border-radius:var(--rx);padding:36px;box-shadow:var(--rs)}
+.donasi-form-card h3{font-family:var(--font-head);font-size:1.15rem;color:var(--g1);margin-bottom:6px;letter-spacing:.3px}
+.donasi-form-card p{font-size:.83rem;color:var(--t3);margin-bottom:24px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:.8rem;font-weight:700;color:var(--t2);margin-bottom:7px;letter-spacing:.3px;text-transform:uppercase}
+.form-control{
+  width:100%;padding:12px 16px;
+  border:1.5px solid #e5e1d8;border-radius:10px;
+  font-family:var(--font-body);font-size:.9rem;background:var(--cr);
+  color:var(--t1);transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.form-control:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(45,138,94,.1)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8c80' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.nominal-preset{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.nom-btn{
+  padding:10px 6px;background:var(--cr);border:1.5px solid #e5e1d8;
+  border-radius:9px;font-family:var(--font-body);font-size:.8rem;
+  cursor:pointer;transition:all .2s;color:var(--t2);font-weight:500;
+}
+.nom-btn:hover,.nom-btn.active{background:var(--g3);color:var(--wh);border-color:var(--g3)}
+@media(max-width:820px){.donasi-layout{grid-template-columns:1fr;gap:36px}}
+
+/* ─── LAPORAN ─────────────────────────────────────────────────── */
+.laporan{
+  background:linear-gradient(160deg,#0a1a10 0%,#0f2316 100%);
+}
+.laporan-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px}
+.lcard{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--rx);padding:24px;text-align:center;
+  transition:background .2s;position:relative;overflow:hidden;
+}
+.lcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.lcard.income::before{background:linear-gradient(90deg,#2d8a5e,#52c898)}
+.lcard.expense::before{background:linear-gradient(90deg,#e57946,#f5b47e)}
+.lcard.balance::before{background:linear-gradient(90deg,var(--au),var(--al))}
+.lcard.jemaah::before{background:linear-gradient(90deg,#4a90e2,#7fb3f5)}
+.lcard:hover{background:rgba(255,255,255,.08)}
+.lcard-icon{
+  width:46px;height:46px;border-radius:12px;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.lcard.income .lcard-icon{background:rgba(45,138,94,.2);color:#52c898}
+.lcard.expense .lcard-icon{background:rgba(229,121,70,.2);color:#f5b47e}
+.lcard.balance .lcard-icon{background:rgba(201,153,58,.2);color:var(--al)}
+.lcard.jemaah .lcard-icon{background:rgba(74,144,226,.2);color:#7fb3f5}
+.lcard h4{font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.lcard-num{font-family:var(--font-head);font-size:1.4rem;color:var(--wh)}
+.lcard-sub{font-size:.72rem;color:rgba(255,255,255,.3);margin-top:5px}
+@media(max-width:700px){.laporan-summary{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.laporan-summary{grid-template-columns:1fr}}
+.laporan-table-wrap{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--rx);overflow:hidden;
+}
+.ltable-header{
+  padding:16px 24px;background:rgba(201,153,58,.1);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.ltable-header h3{font-family:var(--font-head);color:var(--al);font-size:.9rem;letter-spacing:.5px}
+.ltable-period{font-size:.78rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px}
+.ltable-period i{color:var(--au)}
+table{width:100%;border-collapse:collapse}
+th{
+  background:rgba(0,0,0,.2);color:rgba(255,255,255,.5);
+  font-size:.75rem;padding:13px 20px;text-align:left;
+  font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  font-family:var(--font-body);
+}
+td{color:rgba(255,255,255,.72);font-size:.87rem;padding:13px 20px;border-top:1px solid rgba(255,255,255,.05)}
+tr:hover td{background:rgba(255,255,255,.03)}
+.tag-in{color:#52c898;font-weight:700}
+.tag-out{color:#f5b47e;font-weight:700}
+.tr-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;
+}
+.tr-badge.in{background:rgba(45,138,94,.15);color:#52c898}
+.tr-badge.out{background:rgba(229,121,70,.15);color:#f5b47e}
+.overflow-x{overflow-x:auto}
+
+/* ─── BERITA ─────────────────────────────────────────────────── */
+.berita{background:var(--wh)}
+.berita-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px}
+.news-main{border-radius:var(--rx);overflow:hidden;box-shadow:var(--rs);cursor:pointer;position:relative;background:var(--g1)}
+.news-main-img{height:280px;overflow:hidden;position:relative}
+.news-main-img img{width:100%;height:100%;object-fit:cover;display:block}
+.news-main-img svg{width:100%;height:100%;display:block}
+.news-main-body{padding:28px 28px 24px}
+.news-tag{
+  display:inline-block;padding:4px 12px;border-radius:20px;
+  font-size:.72rem;font-weight:700;margin-bottom:12px;
+}
+.tag-utama{background:var(--au);color:var(--g1)}
+.tag-sosial{background:rgba(59,130,246,.15);color:#3b82f6}
+.tag-dakwah{background:rgba(139,92,246,.15);color:#8b5cf6}
+.tag-pendidikan{background:rgba(45,138,94,.15);color:var(--g4)}
+.news-main-body h2{font-family:var(--font-head);font-size:1.15rem;color:var(--wh);margin-bottom:10px;line-height:1.4;letter-spacing:.2px}
+.news-main-body p{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.7}
+.news-meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
+.news-meta span{font-size:.78rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:5px}
+.news-meta i{color:var(--au)}
+.news-side{display:flex;flex-direction:column;gap:16px}
+.news-mini{
+  background:var(--cr);border-radius:14px;overflow:hidden;
+  display:flex;gap:0;box-shadow:0 2px 12px rgba(0,0,0,.06);
+  cursor:pointer;transition:transform .25s,box-shadow .25s;
+}
+.news-mini:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.news-mini-img{width:100px;height:90px;overflow:hidden;flex-shrink:0;position:relative;background:var(--g2)}
+.news-mini-img img{width:100%;height:100%;object-fit:cover;display:block}
+.news-mini-img svg{width:100%;height:100%;display:block;object-fit:cover}
+.news-mini-body{padding:14px 16px;flex:1}
+.news-mini-body .news-tag{margin-bottom:6px;font-size:.68rem;padding:3px 8px}
+.news-mini-body h4{font-family:var(--font-head);font-size:.8rem;color:var(--g1);line-height:1.4;margin-bottom:5px;letter-spacing:.2px}
+.news-mini-body span{font-size:.74rem;color:var(--t3);display:flex;align-items:center;gap:5px}
+.news-mini-body span i{color:var(--au)}
+@media(max-width:820px){
+  .berita-grid{grid-template-columns:1fr}
+  .news-main-img{height:200px}
+}
+
+/* ─── PENGURUS ────────────────────────────────────────────────── */
+.pengurus{background:var(--cr)}
+.pengurus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.pengurus-card{
+  background:var(--wh);border-radius:var(--rx);padding:28px 20px 22px;
+  text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.07);
+  transition:transform .3s,box-shadow .3s;
+}
+.pengurus-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
+.avatar{
+  width:76px;height:76px;border-radius:50%;margin:0 auto 14px;
+  background:linear-gradient(135deg,var(--g3),var(--g5));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-size:1.5rem;color:var(--wh);
+  border:3px solid rgba(201,153,58,.3);
+}
+.pengurus-card h4{font-family:var(--font-head);font-size:.88rem;color:var(--g1);margin-bottom:5px;letter-spacing:.3px}
+.pengurus-jabatan{
+  font-size:.72rem;color:var(--au);font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px;
+}
+.pengurus-card p{font-size:.78rem;color:var(--t3);line-height:1.5}
+
+/* ─── CONTACT ─────────────────────────────────────────────────── */
+.kontak{background:var(--wh)}
+.kontak-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.kontak-info h3{font-family:var(--font-head);font-size:1.3rem;color:var(--g1);margin-bottom:18px;letter-spacing:.3px}
+.kontak-info p{font-size:.93rem;color:var(--t2);line-height:1.85;margin-bottom:28px}
+.kontak-items{display:flex;flex-direction:column;gap:16px;margin-bottom:28px}
+.kontak-item{display:flex;gap:14px;align-items:flex-start}
+.kontak-ic{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(45,106,79,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--g4);font-size:1rem;flex-shrink:0;
+}
+.kontak-item-text strong{display:block;font-size:.85rem;color:var(--g1);margin-bottom:2px;font-weight:700}
+.kontak-item-text span{font-size:.88rem;color:var(--t2)}
+.social-row{display:flex;gap:10px;flex-wrap:wrap}
+.soc-btn{
+  width:42px;height:42px;border-radius:50%;
+  border:1.5px solid #e5e1d8;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t3);font-size:.95rem;text-decoration:none;transition:all .2s;
+}
+.soc-btn:hover{background:var(--g1);border-color:var(--g1);color:var(--wh)}
+.soc-btn.wa:hover{background:#25d366;border-color:#25d366}
+.soc-btn.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:#dc2743}
+.soc-btn.yt:hover{background:#ff0000;border-color:#ff0000}
+.kontak-form-card{background:var(--cr);border-radius:var(--rx);padding:36px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.kontak-form-card h3{font-family:var(--font-head);font-size:1rem;color:var(--g1);margin-bottom:20px;letter-spacing:.3px}
+@media(max-width:820px){.kontak-layout{grid-template-columns:1fr;gap:40px}}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+.footer{
+  background:linear-gradient(180deg,var(--g1) 0%,#060f09 100%);
+  padding:70px 28px 0;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;
+  gap:44px;max-width:1280px;margin:0 auto;padding-bottom:52px;
+}
+.footer-brand .logo{margin-bottom:16px;font-size:1.05rem}
+.footer-brand p{color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.8;max-width:260px;margin-bottom:20px}
+.footer-social{display:flex;gap:10px}
+.fsoc{
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.45);font-size:.88rem;text-decoration:none;transition:all .2s;
+}
+.fsoc:hover{background:var(--au);border-color:var(--au);color:var(--g1)}
+.footer-col h4{color:var(--al);font-size:.75rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;font-family:var(--font-head)}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:9px}
+.footer-col ul li a{color:rgba(255,255,255,.45);font-size:.85rem;text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:7px}
+.footer-col ul li a i{font-size:.7rem;color:var(--au);opacity:.6}
+.footer-col ul li a:hover{color:var(--al)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:20px 0;max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.footer-bottom p{color:rgba(255,255,255,.3);font-size:.78rem}
+.footer-bottom .made{color:rgba(255,255,255,.25);font-size:.75rem;display:flex;align-items:center;gap:5px}
+.footer-bottom .made i{color:#e74c3c}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
+
+/* ─── FLOATING DONATE BTN ────────────────────────────────────── */
+.fab-donate{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  display:flex;flex-direction:column;gap:10px;align-items:flex-end;
+}
+.fab-main{
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--au),var(--al));
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--g1);font-size:1.2rem;box-shadow:0 6px 24px rgba(201,153,58,.4);
+  transition:all .3s;
+}
+.fab-main:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(201,153,58,.55)}
+.fab-tooltip{
+  background:var(--g1);color:var(--wh);font-size:.75rem;font-weight:600;
+  padding:5px 12px;border-radius:6px;white-space:nowrap;
+  opacity:0;transform:translateX(10px);transition:all .2s;pointer-events:none;
+}
+.fab-donate:hover .fab-tooltip{opacity:1;transform:translateX(0)}
+
+/* ─── BACK TO TOP ─────────────────────────────────────────────── */
+#back-top{
+  position:fixed;bottom:96px;right:28px;z-index:800;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(10,31,20,.8);border:1px solid rgba(201,153,58,.3);
+  color:var(--al);cursor:pointer;display:none;align-items:center;justify-content:center;
+  font-size:.9rem;transition:all .2s;backdrop-filter:blur(8px);
+}
+#back-top.visible{display:flex}
+#back-top:hover{background:var(--g2);border-color:var(--al)}
+
+/* ─── UTILITIES ──────────────────────────────────────────────── */
+.flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.mt-auto{margin-top:auto}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+@media(max-width:768px){section{padding:60px 20px}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-crescent"></div>
+  <div class="loader-text">Memuat Halaman</div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" id="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-track" id="ticker-track">
+      <span><i class="fas fa-star"></i> Kuliah Ahad Pagi ba'da shubuh</span>
+      <span><i class="fas fa-mosque"></i> Jadwal Sholat telah diperbarui</span>
+      <span><i class="fas fa-calendar"></i> Malam Jumat: Yasin & Tahlil bersama dimulai pukul 19.30</span>
+      <span><i class="fas fa-donate"></i> Target renovasi Menara dan teras 100% tercapai</span>
+      <span><i class="fas fa-star"></i> Kuliah Ahad Pagi ba'da shubuh</span>
+      <span><i class="fas fa-mosque"></i> Jadwal Sholat telah diperbarui</span>
+      <span><i class="fas fa-calendar"></i> Malam Jumat: Yasin & Tahlil bersama dimulai pukul 19.30</span>
+      <span><i class="fas fa-donate"></i> Target renovasi Menara dan teras 100% tercapai</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="header" id="header">
+  <nav class="nav-container">
+    <a href="#" class="logo">
+      <div class="logo-icon"><i class="fas fa-mosque"></i></div>
+      <div>
+        Masjid Al-Khotib
+        <span class="logo-sub">Kediri, Jawa Timur</span>
+      </div>
+    </a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#profil" class="nav-link">Profil</a></li>
+      <li><a href="#jadwal" class="nav-link">Jadwal Sholat</a></li>
+      <li><a href="#kegiatan" class="nav-link">Kegiatan</a></li>
+      <li><a href="#galeri" class="nav-link">Galeri</a></li>
+      <li><a href="#berita" class="nav-link">Berita</a></li>
+      <li><a href="#pengurus" class="nav-link">Pengurus</a></li>
+      <li><a href="#laporan" class="nav-link">Laporan</a></li>
+      <li><a href="#donasi" class="nav-link nav-btn">Donasi <i class="fas fa-heart"></i></a></li>
+      <li><a href="./loginadmin.html" class="nav-link nav-btn">Login Admin <i class="fas fa-user-lock"></i></a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-geo">
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+    <div class="geo-ring"></div>
+  </div>
+  <div class="hero-pattern"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <i class="fas fa-star"></i>
+        <span id="heroAddress">Jl. Diponegoro No.225, Adan-adan, Adan-Adan, Kec. Gurah, Kabupaten Kediri, Jawa Timur 64181</span>
+      </div>
+      <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <h1 class="hero-title" id="heroTitle">
+        Masjid sebagai
+        <span class="accent">Rumah Umat</span>
+      </h1>
+      <p class="hero-tagline" id="heroSubtitle">Pusat Ibadah, Ilmu &amp; Peradaban Islam</p>
+      <p class="hero-desc" id="heroDescription">Masjid Al-Khotib berdiri sebagai mercusuar keimanan dan tempat bersatunya ummat dalam satu barisan. Mari makmurkan masjid bersama-sama.</p>
+      <div class="hero-btns">
+        <a href="#jadwal" class="btn btn-gold"><i class="fas fa-clock"></i> Jadwal Sholat</a>
+        <a href="#donasi" id="donationButton" class="btn btn-green"><i class="fas fa-heart"></i> Infaq &amp; Donasi</a>
+        <a href="#profil" class="btn btn-outline"><i class="fas fa-info-circle"></i> Profil Masjid</a>
+      </div>
+      <div class="hero-prayer-strip" id="prayer-strip">
+        <!-- filled by JS -->
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="live-clock-card">
+        <div class="date-label">Waktu Sekarang</div>
+        <div class="time-display" id="live-time">--:--:--</div>
+        <div class="hijri-date" id="hijri-date">...</div>
+        <div class="gregorian-date" id="gregorian-date">...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QURAN VERSE -->
+<div class="verse-banner">
+  <div class="verse-inner">
+    <div class="verse-deco"><i class="fas fa-star-and-crescent"></i></div>
+    <div class="verse-arabic">إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ</div>
+    <div class="verse-translation">"Sesungguhnya yang memakmurkan masjid-masjid Allah hanyalah orang-orang yang beriman kepada Allah dan hari akhir."</div>
+    <div class="verse-source">QS. At-Taubah : 18</div>
+  </div>
+</div>
+
+<!-- PROFIL -->
+<section class="profil" id="profil">
+  <div class="container">
+    <div class="profil-layout">
+      <div class="profil-text reveal-left">
+        <div class="section-badge"><span>Tentang Kami</span></div>
+        <h2 class="section-title">Sejarah &amp; Profil<br><span class="gold">Masjid Al-Khotib</span></h2>
+        <div class="section-divider"></div>
+        <p>Masjid Jami’ Al-Khotib tetap berdiri kokoh sebagai salah satu masjid tertua di Kabupaten Kediri. Berlokasi di Jalan Diponegoro, Desa Adan-Adan, Kecamatan Gurah, masjid ini menjadi saksi perjalanan sejarah Islam sejak era kolonial Belanda hingga kini ditetapkan sebagai bangunan cagar budaya.</p>
+        <p>Dengan kapasitas hingga 250 jamaah, Masjid Al-Khotib memiliki fasilitas lengkap seperti ruang sholat utama, tempat wudhu, dan area parkir yang luas. Setiap hari, masjid ini menyelenggarakan berbagai kegiatan keagamaan dan sosial untuk mempererat tali persaudaraan.</p> 
+        <div class="profil-values">
+          <div class="value-card reveal delay-1">
+            <i class="fas fa-book-quran"></i>
+            <h4>Ilmu & Taqwa</h4>
+            <p>Menjunjung tinggi ilmu agama sebagai landasan kehidupan bermasyarakat</p>
+          </div>
+          <div class="value-card reveal delay-2">
+            <i class="fas fa-hands-helping"></i>
+            <h4>Ukhuwah</h4>
+            <p>Mempererat tali persaudaraan sesama muslim dan umat manusia</p>
+          </div>
+          <div class="value-card reveal delay-3">
+            <i class="fas fa-heart"></i>
+            <h4>Amanah</h4>
+            <p>Mengelola amanah jamaah dengan transparan dan bertanggung jawab</p>
+          </div>
+          <div class="value-card reveal delay-4">
+            <i class="fas fa-seedling"></i>
+            <h4>Dakwah</h4>
+            <p>Menyebarkan nilai Islam yang rahmatan lil'alamin kepada masyarakat</p>
+          </div>
+        </div>
+      </div>
+      <div class="profil-stats reveal-right">
+        <div class="stat-row">
+          <div class="stat-card">
+            <span class="stat-num" data-count="250">0</span>
+            <span class="stat-lbl">Kapasitas Jamaah</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="1936">0</span>
+            <span class="stat-lbl">Tahun Berdiri</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-card">
+            <span class="stat-num" data-count="4">0</span>
+            <span class="stat-lbl">Program Rutin</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-count="6">0</span>
+            <span class="stat-lbl">Pengurus Tetap</span>
+          </div>
+        </div>
+        <div class="imam-card">
+          <div class="imam-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="imam-info">
+            <span>Ketua Takmir</span>
+            <h4>H. Kotib, S.Pd</h4>
+            <p>Imam Rawatib &amp; Khatib Utama Masjid Al-Khotib sejak 2016</p>
+          </div>
+        </div>
+        <div class="imam-card" style="background:linear-gradient(135deg,rgba(201,153,58,.12),rgba(201,153,58,.06));border:1px solid rgba(201,153,58,.2)">
+          <div class="imam-avatar" style="background:linear-gradient(135deg,var(--au),var(--al))"><i class="fas fa-mosque"></i></div>
+          <div class="imam-info">
+            <span>Luas Masjid</span>
+            <h4 style="color:var(--al)">± 2.400 m²</h4>
+            <p>Termasuk selasar, tempat wudhu, dan area parkir</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JADWAL SHOLAT + LOKASI -->
+<section class="jadwal-section" id="jadwal">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:44px">
+      <div class="section-badge" style="background:rgba(201,153,58,.12);border-color:rgba(201,153,58,.3)">
+        <span style="color:var(--al)">Jadwal & Lokasi</span>
+      </div>
+      <h2 class="section-title light">Jadwal Sholat &amp; <span class="gold">Lokasi Masjid</span></h2>
+      <div class="section-divider center"></div>
+    </div>
+    <div class="jadwal-grid">
+      <div class="sholat-card reveal-left">
+        <div class="sholat-card-header">
+          <div>
+            <h3><i class="fas fa-clock" style="color:var(--al);margin-right:8px"></i>Jadwal Waktu Sholat</h3>
+            <div style="font-size:.75rem;color:rgba(255,255,255,.55);margin-top:4px"><i class="fas fa-map-marker-alt" style="color:var(--au);margin-right:5px"></i>Kota Kediri, Jawa Timur</div>
+          </div>
+          <div class="sholat-date-badge" id="jadwal-date-badge">
+            <i class="fas fa-calendar"></i> <span id="today-full">...</span>
+          </div>
+        </div>
+        <div id="sholat-list">
+          <!-- filled by JS -->
+        </div>
+        <div class="sholat-footer">
+          <span><i class="fas fa-info-circle"></i> Sumber: Kemenag RI — Kota Kediri</span>
+          <span id="next-info"></span>
+        </div>
+      </div>
+      <div class="maps-card-new reveal-right">
+        <div class="maps-card-header-new">
+          <h3><i class="fas fa-map-marked-alt" style="color:var(--al);margin-right:8px"></i>Lokasi Masjid</h3>
+          <p class="maps-addr">
+            <i class="fas fa-map-marker-alt"></i>
+            Jl. Diponegoro No.225, Adan-adan, Adan-Adan, Kec. Gurah, Kabupaten Kediri, Jawa Timur 64181
+          </p>
+        </div>
+        <iframe
+          src="https://www.google.com/maps?q=Jl.+Diponegoro+No.225,+Adan-adan,+Adan-Adan,+Kec.+Gurah,+Kabupaten+Kediri,+Jawa+Timur+64181&output=embed"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="maps-actions">
+          <a href="https://maps.app.goo.gl/LbrnzHuyhnBmWW6a7" target="_blank" class="map-btn map-btn-primary">
+            <i class="fas fa-directions"></i> Petunjuk Arah
+          </a>
+          <button class="map-btn map-btn-secondary" onclick="copyAddress()">
+            <i class="fas fa-copy"></i> Salin Alamat
+          </button>
+          <a href="https://wa.me/6285230767634?text=Assalamu'alaikum%2C%20saya%20ingin%20bertanya%20tentang%20lokasi%20Masjid%20Al-Khotib" target="_blank" class="map-btn map-btn-secondary">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEGIATAN -->
+<section class="kegiatan" id="kegiatan">
+  <div class="container">
+    <div class="flex-between reveal">
+      <div>
+        <div class="section-badge"><span>Kegiatan</span></div>
+        <h2 class="section-title">Program &amp; <span class="gold">Kajian Rutin</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <a href="#" class="btn btn-outline" style="border-color:#e5e1d8;color:var(--t2);padding:10px 20px;font-size:.82rem;">
+        Lihat Semua <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="kegiatan-tabs reveal">
+      <div class="ktab active" onclick="switchTab(this,'harian')">Harian</div>
+      <div class="ktab" onclick="switchTab(this,'mingguan')">Mingguan</div>
+      <div class="ktab" onclick="switchTab(this,'bulanan')">Bulanan</div>
+      <div class="ktab" onclick="switchTab(this,'khusus')">Khusus</div>
+    </div>
+    <div class="kegiatan-panel active" id="panel-harian">
+      <div class="kegiatan-grid" id="kegiatanGrid"></div>
+    </div>
+    <div class="kegiatan-panel" id="panel-mingguan">
+      <div class="kegiatan-grid"></div>
+    </div>
+    <div class="kegiatan-panel" id="panel-bulanan">
+      <div class="kegiatan-grid"></div>
+    </div>
+    <div class="kegiatan-panel" id="panel-khusus">
+      <div class="kegiatan-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="galeri" id="galeri">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:44px">
+      <div class="section-badge"><span>Galeri</span></div>
+      <h2 class="section-title">Galeri <span class="gold">Foto Masjid</span></h2>
+      <div class="section-divider center"></div>
+    </div>
+    <div class="galeri-grid-new reveal"></div>
+    <div class="text-center" style="margin-top:28px">
+      <a href="#" class="btn btn-outline" style="border-color:#e5e1d8;color:var(--t2)">
+        <i class="fas fa-images"></i> Lihat Semua Galeri
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BERITA -->
+<section class="berita" id="berita">
+  <div class="container">
+    <div class="flex-between reveal" style="margin-bottom:36px">
+      <div>
+        <div class="section-badge"><span>Berita</span></div>
+        <h2 class="section-title">Berita &amp; <span class="gold">Informasi Terkini</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <a href="#" class="btn btn-outline" style="border-color:#e5e1d8;color:var(--t2);padding:10px 20px;font-size:.82rem;">
+        Semua Berita <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="berita-grid reveal" id="beritaGrid"></div>
+  </div>
+</section>
+
+<!-- PENGURUS -->
+<section class="pengurus" id="pengurus">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:44px">
+      <div class="section-badge"><span>Kepengurusan</span></div>
+      <h2 class="section-title">Pengurus &amp; <span class="gold">Takmir Masjid</span></h2>
+      <div class="section-divider center"></div>
+    </div>
+    <div class="pengurus-grid" id="pengurusGrid"></div>
+  </div>
+</section>
+
+
+<!-- LAPORAN KEUANGAN -->
+<section class="laporan" id="laporan">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:44px">
+      <div class="section-badge" style="background:rgba(201,153,58,.12);border-color:rgba(201,153,58,.3)">
+        <span style="color:var(--al)">Transparansi</span>
+      </div>
+      <h2 class="section-title light">Laporan <span class="gold">Keuangan Masjid</span></h2>
+      <div class="section-divider center"></div>
+      <p style="color:rgba(255,255,255,.5);font-size:.9rem;max-width:500px;margin:0 auto">Laporan keuangan diperbarui setiap bulan sebagai bentuk amanah dan transparansi kepada seluruh jamaah</p>
+    </div>
+    <div class="laporan-summary reveal">
+      <div class="lcard income">
+        <div class="lcard-icon"><i class="fas fa-arrow-down"></i></div>
+        <h4>Total Pemasukan</h4>
+        <div class="lcard-num" id="totalPemasukan">Rp 0</div>
+        <div class="lcard-sub" id="laporanPemasukanPeriod">Bulan November 2024</div>
+      </div>
+      <div class="lcard expense">
+        <div class="lcard-icon"><i class="fas fa-arrow-up"></i></div>
+        <h4>Total Pengeluaran</h4>
+        <div class="lcard-num" id="totalPengeluaran">Rp 0</div>
+        <div class="lcard-sub" id="laporanPengeluaranPeriod">Bulan November 2024</div>
+      </div>
+      <div class="lcard balance">
+        <div class="lcard-icon"><i class="fas fa-wallet"></i></div>
+        <h4>Saldo Akhir</h4>
+        <div class="lcard-num" id="saldoAkhir">Rp 0</div>
+        <div class="lcard-sub" id="laporanSaldoPeriod">Per 30 November 2024</div>
+      </div>
+      <div class="lcard jemaah">
+        <div class="lcard-icon"><i class="fas fa-users"></i></div>
+        <h4>Donatur Aktif</h4>
+        <div class="lcard-num" id="donaturCount">0</div>
+        <div class="lcard-sub">Jamaah &amp; Muhsinin</div>
+      </div>
+    </div>
+    <div class="laporan-table-wrap reveal">
+      <div class="ltable-header">
+        <h3><i class="fas fa-list-alt" style="margin-right:8px"></i>Rincian Transaksi Terbaru</h3>
+        <div class="ltable-period" id="laporanPeriod"><i class="fas fa-calendar"></i> November 2024</div>
+      </div>
+      <div class="overflow-x">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Keterangan</th>
+              <th>Kategori</th>
+              <th>Jenis</th>
+              <th>Jumlah</th>
+            </tr>
+          </thead>
+          <tbody id="laporanTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:14px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.06)">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONASI -->
+<section class="donasi" id="donasi">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:44px">
+      <div class="section-badge"><span>Infaq & Donasi</span></div>
+      <h2 class="section-title">Makmurkan Masjid<br><span class="gold">Bersama Kita</span></h2>
+      <div class="section-divider center"></div>
+      <p class="section-lead" style="margin:0 auto">Setiap infaq yang Anda berikan akan dikelola secara amanah untuk membiayai operasional masjid, program dakwah, dan santunan sosial.</p>
+    </div>
+    <div class="donasi-layout reveal">
+      <div class="donasi-left">
+        <div style="font-weight:700;font-size:.82rem;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">Donasi QRIS</div>
+        <div class="qris-card">
+          <div class="qris-label">Scan QRIS</div>
+          <img src="Qris masjid.jpeg" alt="QRIS Masjid Al-Khotib" />
+          <span>Scan QRIS ini untuk donasi. Setelah transfer, kirim konfirmasi lewat form di samping.</span>
+        </div>
+      </div>
+      <div class="donasi-right">
+        <div class="donasi-form-card">
+          <h3>Form Konfirmasi Donasi</h3>
+          <p>Scan QRIS terlebih dahulu, lalu isi form berikut agar donasi Anda tercatat dan didoakan dengan baik.</p>
+          <div class="form-group">
+            <label class="form-label">Nama Donatur</label>
+            <input type="text" class="form-control" placeholder="Nama Lengkap / Hamba Allah">
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. WhatsApp</label>
+            <input type="tel" class="form-control" placeholder="08xx-xxxx-xxxx">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nominal Donasi</label>
+            <div class="nominal-preset">
+              <button class="nom-btn" onclick="setNominal(this,'Rp 25.000')">Rp 25.000</button>
+              <button class="nom-btn" onclick="setNominal(this,'Rp 50.000')">Rp 50.000</button>
+              <button class="nom-btn" onclick="setNominal(this,'Rp 100.000')">Rp 100.000</button>
+              <button class="nom-btn" onclick="setNominal(this,'Rp 250.000')">Rp 250.000</button>
+              <button class="nom-btn" onclick="setNominal(this,'Rp 500.000')">Rp 500.000</button>
+              <button class="nom-btn" onclick="setNominal(this,'')">Lainnya</button>
+            </div>
+            <input type="text" class="form-control" id="nominal-input" placeholder="Atau ketik nominal lain...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Catatan / Doa</label>
+            <textarea class="form-control" placeholder="Mohon doakan keluarga kami..." rows="3"></textarea>
+          </div>
+          <button class="btn btn-gold" style="width:100%;justify-content:center;border-radius:12px;padding:15px;" onclick="submitDonasi()">
+            <i class="fas fa-paper-plane"></i> Kirim Konfirmasi via WhatsApp
+          </button>
+          <p style="font-size:.75rem;color:var(--t3);text-align:center;margin-top:12px"><i class="fas fa-lock" style="color:var(--g4)"></i> Data Anda aman &amp; hanya digunakan untuk pencatatan donasi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="kontak" id="kontak">
+  <div class="container">
+    <div class="kontak-layout">
+      <div class="reveal-left">
+        <div class="section-badge"><span>Hubungi Kami</span></div>
+        <h2 class="section-title">Kontak &amp; <span class="gold">Lokasi</span></h2>
+        <div class="section-divider"></div>
+        <p>Kami dengan senang hati menerima pertanyaan, saran, kritik, serta kerjasama dakwah dari siapapun. Silakan hubungi kami melalui berbagai saluran berikut.</p>
+        <br
+        <br
+        <div class="kontak-items">
+          <div class="kontak-item">
+            <div class="kontak-ic"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="kontak-item-text">
+              <strong>Alamat</strong>
+              <span>Jl. Diponegoro No.225, Adan-adan, Adan-Adan, Kec. Gurah, Kabupaten Kediri, Jawa Timur 64181</span>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="kontak-ic"><i class="fas fa-phone"></i></div>
+            <div class="kontak-item-text">
+              <strong>Telepon / WhatsApp</strong>
+              <span>+62 812-3456-7890 (Sekretariat Takmir)</span>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="kontak-ic"><i class="fas fa-envelope"></i></div>
+            <div class="kontak-item-text">
+              <strong>Email</strong>
+              <span>takmir@masjidalkhotiib.or.id</span>
+            </div>
+          </div>
+          <div class="kontak-item">
+            <div class="kontak-ic"><i class="fas fa-clock"></i></div>
+            <div class="kontak-item-text">
+              <strong>Jam Operasional Sekretariat</strong>
+              <span>Senin – Sabtu: 08.00 – 16.00 WIB</span>
+            </div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="#" class="soc-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="soc-btn ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-btn yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="soc-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="soc-btn" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="kontak-form-card">
+          <h3><i class="fas fa-paper-plane" style="color:var(--g4);margin-right:8px"></i>Kirim Pesan</h3>
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" placeholder="Nama Anda">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email / WhatsApp</label>
+            <input type="text" class="form-control" placeholder="Email atau nomor WhatsApp">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subjek</label>
+            <select class="form-control form-select">
+              <option>Pertanyaan Umum</option>
+              <option>Kerjasama Dakwah</option>
+              <option>Donasi &amp; Infaq</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pesan</label>
+            <textarea class="form-control" rows="4" placeholder="Tulis pesan Anda..."></textarea>
+          </div>
+          <button class="btn btn-gold" style="width:100%;justify-content:center;border-radius:12px;padding:14px">
+            <i class="fas fa-paper-plane"></i> Kirim Pesan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo"><div class="logo-icon"><i class="fas fa-mosque"></i></div> Masjid Al-Khotib</a>
+      <p>Masjid Al-Khotib berdiri sejak 1975 sebagai pusat ibadah, pendidikan, dan dakwah di Kota Kediri, Jawa Timur. Mari bersama memakmurkan masjid.</p>
+      <div class="footer-social">
+        <a href="#" class="fsoc" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="fsoc" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="fsoc" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="fsoc" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="fsoc" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="#profil"><i class="fas fa-chevron-right"></i> Profil Masjid</a></li>
+        <li><a href="#jadwal"><i class="fas fa-chevron-right"></i> Jadwal Sholat</a></li>
+        <li><a href="#kegiatan"><i class="fas fa-chevron-right"></i> Kegiatan</a></li>
+        <li><a href="#galeri"><i class="fas fa-chevron-right"></i> Galeri Foto</a></li>
+        <li><a href="#berita"><i class="fas fa-chevron-right"></i> Berita</a></li>
+        <li><a href="#pengurus"><i class="fas fa-chevron-right"></i> Pengurus</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#donasi"><i class="fas fa-chevron-right"></i> Donasi &amp; Infaq</a></li>
+        <li><a href="#laporan"><i class="fas fa-chevron-right"></i> Laporan Keuangan</a></li>
+        <li><a href="#kontak"><i class="fas fa-chevron-right"></i> Kontak Kami</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Jadwal Sholat</h4>
+      <ul id="footer-sholat">
+        <li><a href="#jadwal"><i class="fas fa-circle" style="font-size:.4rem"></i> Subuh — <span id="f-subuh">--:--</span></a></li>
+        <li><a href="#jadwal"><i class="fas fa-circle" style="font-size:.4rem"></i> Zuhur — <span id="f-zuhur">--:--</span></a></li>
+        <li><a href="#jadwal"><i class="fas fa-circle" style="font-size:.4rem"></i> Ashar — <span id="f-ashar">--:--</span></a></li>
+        <li><a href="#jadwal"><i class="fas fa-circle" style="font-size:.4rem"></i> Maghrib — <span id="f-maghrib">--:--</span></a></li>
+        <li><a href="#jadwal"><i class="fas fa-circle" style="font-size:.4rem"></i> Isya — <span id="f-isya">--:--</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Takmir Masjid Al-Khotib Kediri. Semua hak dilindungi.</p>
+    <div class="made">Dibuat dengan <i class="fas fa-heart"></i> untuk Ummat</div>
+  </div>
+</footer>
+
+<!-- BERITA DETAIL MODAL -->
+<div id="beritaDetailModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:1000;overflow-y:auto">
+  <div style="background:white;max-width:600px;margin:40px auto;border-radius:12px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.2)">
+    <div style="padding:30px;position:relative">
+      <button onclick="closeBeritaDetail()" style="position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#999">&times;</button>
+      <div id="beritaDetailContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div id="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></div>
+  <svg id="lightbox-img" width="600" height="450" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="450" fill="#0f2316"/>
+    <text x="300" y="225" font-size="60" text-anchor="middle">🕌</text>
+  </svg>
+</div>
+
+<!-- FAB Donate -->
+<div class="fab-donate">
+  <div class="fab-tooltip">Donasi Sekarang</div>
+  <button class="fab-main" onclick="document.getElementById('donasi').scrollIntoView({behavior:'smooth'})">
+    <i class="fas fa-heart"></i>
+  </button>
+</div>
+
+<!-- Back to top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+/* ── LOADER ───────────────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+});
+
+/* ── PROGRESS BAR ─────────────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+  // header scroll
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+  // back to top
+  document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  // reveal
+  revealElements();
+});
+
+/* ── NAVBAR HAMBURGER ─────────────────────────────────────────── */
+const ham = document.getElementById('hamburger');
+const menu = document.getElementById('nav-menu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('active');
+  menu.classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(l => {
+  l.addEventListener('click', () => {
+    ham.classList.remove('active');
+    menu.classList.remove('open');
+  });
+});
+
+/* ── ACTIVE NAV ───────────────────────────────────────────────── */
+const sections = document.querySelectorAll('section[id], div[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+  });
+});
+
+/* ── LIVE CLOCK ───────────────────────────────────────────────── */
+function updateClock() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('live-time').textContent =
+    `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  document.getElementById('gregorian-date').textContent =
+    `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById('today-full').textContent =
+    `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  // Approximate Hijri conversion (simplified)
+  const hijriMonths = ['Muharram','Safar','Rabi\'ul Awwal','Rabi\'ul Akhir','Jumadal Awwal','Jumadal Akhir','Rajab','Sya\'ban','Ramadan','Syawal','Dzulqa\'dah','Dzulhijjah'];
+  const jd = Math.floor((now - new Date('622-07-16')) / 86400000) + 1;
+  const hm = Math.floor((30 * jd - 29) / 29.530588853);
+  const hday = Math.floor(jd - (29.530588853 * hm / 30));
+  const hy = Math.floor(hm / 12) + 1;
+  const hmo = (hm % 12);
+  document.getElementById('hijri-date').textContent = `${hday || 1} ${hijriMonths[hmo] || hijriMonths[0]} ${hy} H`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* ── PRAYER TIMES (Kediri static approx) ─────────────────────── */
+const prayerTimes = [
+  { name: 'Subuh',   arabic: 'الصبح',  icon: 'fa-sun',         time: '04:12', footerId: 'f-subuh'  },
+  { name: 'Dzuhur',  arabic: 'الظهر',  icon: 'fa-cloud-sun',   time: '11:45', footerId: 'f-zuhur'  },
+  { name: 'Ashar',   arabic: 'العصر',  icon: 'fa-sun',         time: '15:03', footerId: 'f-ashar'  },
+  { name: 'Maghrib', arabic: 'المغرب', icon: 'fa-sunset',      time: '17:48', footerId: 'f-maghrib' },
+  { name: 'Isya',    arabic: 'العشاء', icon: 'fa-moon',        time: '19:02', footerId: 'f-isya'   },
+];
+
+function getActivePrayer() {
+  const now = new Date();
+  const curr = now.getHours() * 60 + now.getMinutes();
+  const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+  let active = 4; // Isya by default (late night)
+  for (let i = 0; i < prayerTimes.length; i++) {
+    if (curr >= toMin(prayerTimes[i].time)) active = i;
+  }
+  return active;
+}
+
+function getNextPrayer() {
+  const now = new Date();
+  const curr = now.getHours() * 60 + now.getMinutes();
+  const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+  for (let i = 0; i < prayerTimes.length; i++) {
+    if (curr < toMin(prayerTimes[i].time)) return i;
+  }
+  return 0; // Subuh tomorrow
+}
+
+function formatCountdown(targetTime) {
+  const now = new Date();
+  const curr = now.getHours() * 60 + now.getMinutes();
+  const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+  let diff = toMin(targetTime) - curr;
+  if (diff < 0) diff += 24 * 60;
+  const h = Math.floor(diff / 60), m = diff % 60;
+  return h > 0 ? `${h}j ${m}m lagi` : `${m} menit lagi`;
+}
+
+function renderPrayers() {
+  const active = getActivePrayer();
+  const next = getNextPrayer();
+  const list = document.getElementById('sholat-list');
+  list.innerHTML = '';
+  prayerTimes.forEach((p, i) => {
+    const isActive = i === active;
+    const isNext = i === next;
+    const row = document.createElement('div');
+    row.className = 'sholat-row' + (isActive ? ' active' : '');
+    row.innerHTML = `
+      <div class="sholat-row-left">
+        <div class="sholat-icon"><i class="fas ${p.icon}"></i></div>
+        <div>
+          <div class="sholat-row-name">
+            ${p.name}
+            ${isActive ? '<span class="active-badge">Aktif</span>' : ''}
+          </div>
+          <span class="sholat-row-arabic">${p.arabic}</span>
+          ${isNext ? `<span class="next-countdown">${formatCountdown(p.time)}</span>` : ''}
+        </div>
+      </div>
+      <div class="sholat-time">${p.time}</div>
+    `;
+    list.appendChild(row);
+    // footer
+    const fEl = document.getElementById(p.footerId);
+    if (fEl) fEl.textContent = p.time;
+  });
+  // next info
+  const ni = document.getElementById('next-info');
+  if (ni) ni.innerHTML = `<i class="fas fa-bell"></i> ${prayerTimes[next].name} ${formatCountdown(prayerTimes[next].time)}`;
+}
+renderPrayers();
+setInterval(renderPrayers, 60000);
+
+/* Hero prayer strip */
+function renderHeroPrayers() {
+  const strip = document.getElementById('prayer-strip');
+  if (!strip) return;
+  const next = getNextPrayer();
+  strip.innerHTML = prayerTimes.map((p, i) => `
+    <div class="prayer-chip ${i === next ? 'next-prayer' : ''}">
+      <span class="prayer-name">${p.name}</span>
+      <span class="prayer-time">${p.time}</span>
+      ${i === next ? `<span class="prayer-countdown">${formatCountdown(p.time)}</span>` : ''}
+    </div>
+  `).join('');
+}
+renderHeroPrayers();
+setInterval(renderHeroPrayers, 60000);
+
+/* ── SCROLL REVEAL ────────────────────────────────────────────── */
+function revealElements() {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+      el.classList.add('visible');
+    }
+  });
+}
+revealElements();
+
+/* ── COUNT UP ─────────────────────────────────────────────────── */
+function countUp(el, target, duration = 1500) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target.toLocaleString('id'); clearInterval(timer); }
+    else el.textContent = Math.floor(start).toLocaleString('id');
+  }, 16);
+}
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.dataset.count) countUp(el, parseInt(el.dataset.count));
+    if (el.dataset.countIdr) {
+      let start = 0;
+      const target = parseInt(el.dataset.countIdr);
+      const step = target / 90;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+          el.textContent = 'Rp ' + target.toLocaleString('id');
+          clearInterval(timer);
+        } else {
+          el.textContent = 'Rp ' + Math.floor(start).toLocaleString('id');
+        }
+      }, 16);
+    }
+    countObs.unobserve(el);
+  });
+}, { threshold: .3 });
+document.querySelectorAll('[data-count],[data-count-idr]').forEach(el => countObs.observe(el));
+
+/* ── PROGRESS BARS ────────────────────────────────────────────── */
+const progObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.program-bar').forEach(bar => {
+        const w = bar.style.width; bar.style.width = '0';
+        setTimeout(() => { bar.style.width = w; }, 200);
+      });
+    }
+  });
+}, { threshold: .3 });
+document.querySelectorAll('.donasi-program').forEach(el => progObs.observe(el));
+
+/* ── KEGIATAN TABS ────────────────────────────────────────────── */
+function switchTab(tab, panelId) {
+  document.querySelectorAll('.ktab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.kegiatan-panel').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+/* ── DONASI FORM ──────────────────────────────────────────────── */
+function setNominal(btn, val) {
+  document.querySelectorAll('.nom-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('nominal-input').value = val;
+}
+function submitDonasi() {
+  const nama = document.querySelector('.donasi-form-card input[type="text"]').value || 'Hamba Allah';
+  const nominal = document.getElementById('nominal-input').value || '...';
+  const jenis = document.querySelector('.donasi-form-card select').value;
+  const msg = encodeURIComponent(`Assalamu'alaikum Warahmatullahi Wabarakatuh\n\nSaya ingin konfirmasi donasi:\n\nNama: ${nama}\nJenis: ${jenis}\nNominal: ${nominal}\n\nBarakallahu fiikum 🤲`);
+  window.open(`https://wa.me/6285230767634?text=${msg}`, '_blank');
+}
+
+/* ── COPY FUNCTIONS ───────────────────────────────────────────── */
+function copyRek(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<i class="fas fa-copy"></i> Salin'; }, 2000);
+  });
+}
+function copyAddress() {
+  navigator.clipboard.writeText('Jl. Diponegoro No.225, Adan-adan, Adan-Adan, Kec. Gurah, Kabupaten Kediri, Jawa Timur 64181')
+    .then(() => alert('Alamat tersalin!'));
+}
+
+/* ── LIGHTBOX ─────────────────────────────────────────────────── */
+function openLightbox(el) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  
+  // Try to find img element first (for galeri)
+  const img = el.querySelector('img');
+  if (img) {
+    const clonedImg = img.cloneNode();
+    clonedImg.id = 'lightbox-img';
+    clonedImg.style.maxWidth = '90vw';
+    clonedImg.style.maxHeight = '85vh';
+    clonedImg.style.borderRadius = '12px';
+    lightboxImg.replaceWith(clonedImg);
+  } else {
+    // Fallback to SVG
+    const svg = el.querySelector('svg');
+    if (svg) {
+      document.getElementById('lightbox-img').outerHTML = svg.outerHTML;
+      const lbImg = lightbox.querySelector('svg');
+      if (lbImg) { lbImg.style.maxWidth = '90vw'; lbImg.style.maxHeight = '85vh'; lbImg.style.borderRadius = '12px'; lbImg.id = 'lightbox-img'; }
+    }
+  }
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ── BERITA DETAIL MODAL ──────────────────────────────────────── */
+function openBeritaDetail(judul, kategori, isi, tanggal) {
+  const modal = document.getElementById('beritaDetailModal');
+  const content = document.getElementById('beritaDetailContent');
+  const tagClass = (kind) => {
+    const lower = String(kind || '').toLowerCase();
+    if (lower.includes('kajian')) return 'tag-dakwah';
+    if (lower.includes('sosial')) return 'tag-sosial';
+    if (lower.includes('utama')) return 'tag-utama';
+    if (lower.includes('acara')) return 'tag-pendidikan';
+    return 'tag-utama';
+  };
+  content.innerHTML = `
+    <span class="news-tag ${tagClass(kategori)}" style="display:inline-block">${escapeHtml(kategori || 'Berita')}</span>
+    <h2 style="font-size:1.4rem;margin:15px 0;color:#1a1a1a;line-height:1.4">${escapeHtml(judul)}</h2>
+    <div style="display:flex;gap:16px;margin:15px 0;font-size:.85rem;color:#666">
+      <span><i class="fas fa-calendar"></i> ${escapeHtml(tanggal)}</span>
+      <span><i class="fas fa-user"></i> Admin Takmir</span>
+    </div>
+    <div style="border-top:1px solid #eee;padding-top:20px;margin-top:20px;color:#555;line-height:1.8;font-size:.95rem">${escapeHtml(isi)}</div>
+  `;
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeBeritaDetail() {
+  document.getElementById('beritaDetailModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBeritaDetail(); });
+
+/* ── TICKER DUPLICATE ─────────────────────────────────────────── */
+const track = document.getElementById('ticker-track');
+if (track) {
+  const clone = track.cloneNode(true);
+  track.parentNode.insertBefore(clone, track.nextSibling);
+}
+
+/* ── SMOOTH ANCHOR ────────────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ── ADMIN CONTENT LOADER ─────────────────────────────────────────── */
+(function applyAdminContent() {
+    const homeRaw = localStorage.getItem('masjidHomeData');
+    let data = null;
+    if (homeRaw) {
+      try {
+        data = JSON.parse(homeRaw);
+      } catch (err) {
+        data = null;
+      }
+    }
+
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (!el || !text) return;
+      el.textContent = text;
+    };
+
+    if (data) {
+      if (data.heroTitle) {
+        const heroTitle = document.getElementById('heroTitle');
+        if (heroTitle) heroTitle.innerHTML = data.heroTitle;
+      }
+
+      setText('heroSubtitle', data.heroSubtitle);
+      setText('heroDescription', data.heroDescription);
+      setText('heroAddress', data.masjidAddress);
+
+      if (data.donationLink) {
+        const donateBtn = document.getElementById('donationButton');
+        if (donateBtn) donateBtn.href = data.donationLink;
+      }
+
+      if (data.announcementText) {
+        const tickerTrack = document.getElementById('ticker-track');
+        if (tickerTrack) {
+          tickerTrack.innerHTML = '';
+          const announcements = data.announcementText
+            .split(';')
+            .map(item => item.trim())
+            .filter(Boolean);
+          const icons = ['fas fa-star', 'fas fa-mosque', 'fas fa-heart', 'fas fa-calendar', 'fas fa-donate'];
+
+          announcements.forEach((announcement, index) => {
+            const span = document.createElement('span');
+            span.innerHTML = `<i class="${icons[index % icons.length]}"></i> ${announcement}`;
+            tickerTrack.appendChild(span);
+          });
+
+          const existingClones = tickerTrack.parentNode.querySelectorAll('#ticker-track');
+          if (existingClones.length > 1) {
+            for (let i = 1; i < existingClones.length; i++) {
+              existingClones[i].remove();
+            }
+          }
+
+          const clone = tickerTrack.cloneNode(true);
+          tickerTrack.parentNode.insertBefore(clone, tickerTrack.nextSibling);
+        }
+      }
+    }
+
+    function getAdminItems(key) {
+      const raw = localStorage.getItem(key);
+      if (!raw) return [];
+      try { return JSON.parse(raw); } catch (err) { return []; }
+    }
+
+    function formatCurrency(num) {
+      return Number(num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[char]);
+    }
+
+    function initials(name) {
+      return String(name || '').split(' ').filter(Boolean).slice(0, 2)
+        .map(word => word[0]?.toUpperCase())
+        .join('') || 'AA';
+    }
+
+    function renderKegiatanAdmin() {
+      const items = getAdminItems('masjidKegiatanData');
+      if (!items.length) return;
+      const grid = document.getElementById('kegiatanGrid');
+      if (!grid) return;
+      grid.innerHTML = items.map((item, index) => `
+        <div class="kegiatan-card reveal delay-${(index % 3) + 1}">
+          <div class="kcard-top"><div class="kcard-icon green"><i class="fas fa-calendar-alt"></i></div><span class="kcard-badge badge-harian">Kegiatan</span></div>
+          <div class="kcard-body">
+            <h3>${escapeHtml(item.name)}</h3>
+            <p>${escapeHtml(item.desc)}</p>
+            <div class="kcard-meta">
+              <span><i class="fas fa-clock"></i> ${escapeHtml(item.jadwal)}</span>
+              <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(item.tempat)}</span>
+            </div>
+          </div>
+          <div class="kcard-footer">
+            <div class="kcard-ustadz"><i class="fas fa-user-graduate"></i> Admin</div>
+            <a href="#" class="kcard-link">Detail <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderBeritaAdmin() {
+      const items = getAdminItems('masjidBeritaData');
+      if (!items.length) return;
+      const grid = document.getElementById('beritaGrid');
+      if (!grid) return;
+      const main = items[0];
+      const side = items.slice(1, 5);
+      const tagClass = kind => {
+        const lower = String(kind || '').toLowerCase();
+        if (lower.includes('kajian')) return 'tag-dakwah';
+        if (lower.includes('sosial')) return 'tag-sosial';
+        if (lower.includes('utama')) return 'tag-utama';
+        if (lower.includes('acara')) return 'tag-pendidikan';
+        return 'tag-utama';
+      };
+      const mainHtml = `
+        <div class="news-main berita-clickable" data-judul="${escapeHtml(main.judul)}" data-kategori="${escapeHtml(main.kategori)}" data-isi="${escapeHtml(main.isi)}" data-tanggal="${escapeHtml(main.tanggal)}" style="cursor:pointer">
+          <div class="news-main-img">
+            ${main.foto ? `<img src="${escapeHtml(main.foto)}" alt="${escapeHtml(main.judul)}">` : `<svg width="100%" height="100%" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="ng1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a4230"/><stop offset="100%" stop-color="#0f2316"/></linearGradient></defs>
+              <rect width="600" height="280" fill="url(#ng1)"/>
+              <circle cx="300" cy="140" r="120" fill="none" stroke="rgba(201,153,58,.1)" stroke-width="1"/>
+              <circle cx="300" cy="140" r="80" fill="none" stroke="rgba(201,153,58,.08)" stroke-width="1"/>
+              <text x="300" y="120" font-size="50" text-anchor="middle">📰</text>
+              <text x="300" y="175" font-family="serif" font-size="13" fill="rgba(201,153,58,.8)" text-anchor="middle">${escapeHtml(main.kategori || '')}</text>
+            </svg>`}
+          </div>
+          <div class="news-main-body" style="background:linear-gradient(135deg,#1a3a2a,#0f2316)">
+            <span class="news-tag ${tagClass(main.kategori)}">${escapeHtml(main.kategori || 'Berita')}</span>
+            <h2>${escapeHtml(main.judul)}</h2>
+            <p>${escapeHtml(main.isi)}</p>
+            <div class="news-meta">
+              <span><i class="fas fa-calendar"></i> ${escapeHtml(main.tanggal)}</span>
+              <span><i class="fas fa-user"></i> Admin Takmir</span>
+            </div>
+          </div>
+        </div>
+      `;
+      const sideHtml = side.map(item => `
+        <div class="news-mini berita-clickable" data-judul="${escapeHtml(item.judul)}" data-kategori="${escapeHtml(item.kategori)}" data-isi="${escapeHtml(item.isi)}" data-tanggal="${escapeHtml(item.tanggal)}" style="cursor:pointer">
+          <div class="news-mini-img">
+            ${item.foto ? `<img src="${escapeHtml(item.foto)}" alt="${escapeHtml(item.judul)}" style="width:100%;height:90px;object-fit:cover;">` : `<svg width="100" height="90" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="90" fill="#1a3a2a"/><text x="50" y="52" font-size="24" text-anchor="middle">📰</text>
+            </svg>`}
+          </div>
+          <div class="news-mini-body">
+            <span class="news-tag ${tagClass(item.kategori)}">${escapeHtml(item.kategori || 'Info')}</span>
+            <h4>${escapeHtml(item.judul)}</h4>
+            <span><i class="fas fa-calendar"></i> ${escapeHtml(item.tanggal)}</span>
+          </div>
+        </div>
+      `).join('');
+      grid.innerHTML = mainHtml + `<div class="news-side">${sideHtml}</div>`;
+    }
+
+    function renderGaleriAdmin() {
+      const items = getAdminItems('masjidGaleriData');
+      if (!items.length) return;
+      const grid = document.querySelector('.galeri-grid-new');
+      if (!grid) return;
+      grid.innerHTML = items.map((item, index) => `
+        <div class="gi" onclick="openLightbox(this)">
+          <div class="gi-inner">
+            <img src="${escapeHtml(item.foto)}" alt="${escapeHtml(item.judul)}">
+          </div>
+          <div class="gi-overlay">
+            <h4>${escapeHtml(item.judul)}</h4>
+            <span><i class="fas fa-camera"></i> ${escapeHtml(item.deskripsi)}</span>
+          </div>
+          <div class="gi-view-btn"><i class="fas fa-expand"></i></div>
+        </div>
+      `).join('');
+    }
+
+    function renderPengurusAdmin() {
+      const items = getAdminItems('masjidPengurusData');
+      if (!items.length) return;
+      const grid = document.getElementById('pengurusGrid');
+      if (!grid) return;
+      grid.innerHTML = items.map((item, index) => `
+        <div class="pengurus-card reveal delay-${(index % 4) + 1}">
+          <div class="avatar">${escapeHtml(initials(item.nama))}</div>
+          <h4>${escapeHtml(item.nama)}</h4>
+          <span class="pengurus-jabatan">${escapeHtml(item.jabatan)}</span>
+          <p>${escapeHtml(item.kontak || '')}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderLaporanAdmin() {
+      const pemasukan = getAdminItems('masjidPemasukanData');
+      const pengeluaran = getAdminItems('masjidPengeluaranData');
+      if (!pemasukan.length && !pengeluaran.length) return;
+
+      const totalMasuk = pemasukan.reduce((sum, item) => sum + (Number(item.nominal) || 0), 0);
+      const totalKeluar = pengeluaran.reduce((sum, item) => sum + (Number(item.nominal) || 0), 0);
+      const saldo = totalMasuk - totalKeluar;
+      const totalDonatur = pemasukan.length;
+      const periodLabel = pemasukan.concat(pengeluaran)
+        .map(item => item.tanggal)
+        .filter(Boolean)
+        .sort((a, b) => new Date(b) - new Date(a))[0];
+
+      const setText = (id, text, keepIcon = false) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = keepIcon ? `<i class="fas fa-calendar"></i> ${text}` : text;
+      };
+
+      setText('totalPemasukan', 'Rp ' + formatCurrency(totalMasuk));
+      setText('totalPengeluaran', 'Rp ' + formatCurrency(totalKeluar));
+      setText('saldoAkhir', 'Rp ' + formatCurrency(saldo));
+      setText('donaturCount', totalDonatur.toString());
+      if (periodLabel) {
+        setText('laporanPeriod', `Periode ${new Date(periodLabel).toLocaleString('id-ID', { month: 'long', year: 'numeric' })}`, true);
+      }
+
+      const rows = [...pemasukan.map(item => ({ ...item, tipe: 'Pemasukan' })), ...pengeluaran.map(item => ({ ...item, tipe: 'Pengeluaran' }))]
+        .sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal))
+        .slice(0, 7)
+        .map(item => {
+          const isIn = item.tipe === 'Pemasukan';
+          return `
+            <tr>
+              <td>${escapeHtml(item.tanggal)}</td>
+              <td>${escapeHtml(item.keterangan || item.kategori || '')}</td>
+              <td>${escapeHtml(item.kategori || '')}</td>
+              <td><span class="tr-badge ${isIn ? 'in' : 'out'}"><i class="fas fa-arrow-${isIn ? 'down' : 'up'}" style="font-size:.65rem"></i> ${isIn ? 'Masuk' : 'Keluar'}</span></td>
+              <td class="${isIn ? 'tag-in' : 'tag-out'}">${isIn ? '+' : '-'} Rp ${formatCurrency(item.nominal)}</td>
+            </tr>
+          `;
+        }).join('');
+
+      const body = document.getElementById('laporanTableBody');
+      if (body) body.innerHTML = rows;
+    }
+
+    function renderDonasiAdmin() {
+      const items = getAdminItems('masjidDonasiData');
+      if (!items.length) return;
+      const grid = document.getElementById('donasiProgramGrid');
+      if (!grid) return;
+      grid.innerHTML = items.map(item => `
+        <div class="program-item">
+          <div class="program-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <div class="program-info" style="flex:1">
+            <h4>${escapeHtml(item.nama)}</h4>
+            <p>${escapeHtml(item.keterangan || item.tanggal || 'Donasi terkini')}</p>
+            <div class="program-progress"><div class="program-bar" style="width:100%"></div></div>
+            <div class="program-pct">Donasi: Rp ${formatCurrency(item.nominal)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderProgramsAdmin() {
+      const items = getAdminItems('masjidProgramData');
+      if (!items.length) return;
+
+      const typeColors = {
+        harian: { badge: 'badge-harian', icon: 'fas fa-sun', color: 'gold' },
+        mingguan: { badge: 'badge-mingguan', icon: 'fas fa-star', color: 'gold' },
+        bulanan: { badge: 'badge-bulanan', icon: 'fas fa-graduation-cap', color: 'green' },
+        khusus: { badge: 'badge-mingguan', icon: 'fas fa-crescent', color: 'gold' }
+      };
+
+      const iconMap = {
+        harian: 'fas fa-sun',
+        mingguan: 'fas fa-star',
+        bulanan: 'fas fa-graduation-cap',
+        khusus: 'fas fa-crescent'
+      };
+
+      // Clear all panels first
+      ['harian', 'mingguan', 'bulanan', 'khusus'].forEach(type => {
+        const panelGrid = document.querySelector(`#panel-${type} .kegiatan-grid`);
+        if (panelGrid) panelGrid.innerHTML = '';
+      });
+
+      // Group programs by type
+      const grouped = { harian: [], mingguan: [], bulanan: [], khusus: [] };
+      items.forEach(item => {
+        if (grouped[item.tipe]) grouped[item.tipe].push(item);
+      });
+
+      // Render programs in each panel
+      ['harian', 'mingguan', 'bulanan', 'khusus'].forEach(type => {
+        const panelGrid = document.querySelector(`#panel-${type} .kegiatan-grid`);
+        if (!panelGrid) return;
+
+        if (grouped[type].length === 0) {
+          panelGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #999;">Belum ada program untuk kategori ini</p>';
+          return;
+        }
+
+        const config = typeColors[type];
+        const html = grouped[type].map((item, index) => `
+          <div class="kegiatan-card reveal delay-${(index % 3) + 1}">
+            <div class="kcard-top">
+              <div class="kcard-icon ${config.color}">
+                <i class="${item.icon || config.icon}"></i>
+              </div>
+              <span class="kcard-badge ${config.badge}">${type.charAt(0).toUpperCase() + type.slice(1)}</span>
+            </div>
+            <div class="kcard-body">
+              <h3>${escapeHtml(item.nama)}</h3>
+              <p>${escapeHtml(item.desc)}</p>
+              <div class="kcard-meta">
+                <span><i class="fas fa-clock"></i> ${escapeHtml(item.jadwal)}</span>
+                <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(item.tempat)}</span>
+              </div>
+            </div>
+            <div class="kcard-footer">
+              <div class="kcard-ustadz"><i class="fas fa-user-graduate"></i> ${escapeHtml(item.ustadz)}</div>
+              <a href="#" class="kcard-link">Detail <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        `).join('');
+
+        panelGrid.innerHTML = html;
+      });
+
+    }
+
+    renderKegiatanAdmin();
+    renderBeritaAdmin();
+    renderGaleriAdmin();
+    renderPengurusAdmin();
+    renderDonasiAdmin();
+    renderLaporanAdmin();
+    renderProgramsAdmin();
+    
+    // Add event listeners untuk berita clickable (setelah render)
+    document.addEventListener('click', (e) => {
+      const beritaEl = e.target.closest('.berita-clickable');
+      if (beritaEl) {
+        const judul = beritaEl.getAttribute('data-judul');
+        const kategori = beritaEl.getAttribute('data-kategori');
+        const isi = beritaEl.getAttribute('data-isi');
+        const tanggal = beritaEl.getAttribute('data-tanggal');
+        if (judul && isi) {
+          openBeritaDetail(judul, kategori, isi, tanggal);
+        }
+      }
+    });
+})();
+</script>
+</body>
+</html>

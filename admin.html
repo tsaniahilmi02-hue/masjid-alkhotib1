@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Masjid Al-Khotib</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-mosque"></i>
+                <span>Masjid Al-Khotib</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#dashboard" class="nav-link active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                <li><a href="#program" class="nav-link" data-page="program"><i class="fas fa-tasks"></i><span>Kelola Program</span></a></li>
+                <li><a href="#berita" class="nav-link" data-page="berita"><i class="fas fa-newspaper"></i><span>Kelola Berita</span></a></li>
+                <li><a href="#galeri" class="nav-link" data-page="galeri"><i class="fas fa-images"></i><span>Kelola Galeri</span></a></li>
+                <li><a href="#pengurus" class="nav-link" data-page="pengurus"><i class="fas fa-users"></i><span>Kelola Pengurus</span></a></li>
+                <li><a href="#inventaris" class="nav-link" data-page="inventaris"><i class="fas fa-boxes"></i><span>Inventaris</span></a></li>
+                <li><a href="#pemasukan" class="nav-link" data-page="pemasukan"><i class="fas fa-arrow-up"></i><span>Pemasukan</span></a></li>
+                <li><a href="#pengeluaran" class="nav-link" data-page="pengeluaran"><i class="fas fa-arrow-down"></i><span>Pengeluaran</span></a></li>
+                <li><a href="#laporan" class="nav-link" data-page="laporan"><i class="fas fa-file-chart-line"></i><span>Laporan</span></a></li>
+                <li><a href="#" class="nav-link logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content" id="mainContent">
+        <header class="header">
+            <div class="header-left">
+                <i class="fas fa-bars menu-toggle" id="mobileMenuToggle"></i>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Admin Takmir</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="dashboard" class="page active">
+            <div class="stats-grid">
+                <div class="stat-card primary">
+                    <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
+                    <div><h3>Total Berita</h3><div class="stat-number" id="statBerita">0</div></div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div><h3>Total Kegiatan</h3><div class="stat-number" id="statKegiatan">0</div></div>
+                </div>
+                <div class="stat-card warning" onclick="document.querySelector('[data-page=pemasukan]').click();">
+                    <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
+                    <div><h3>Total Pemasukan</h3><div class="stat-number" id="statPemasukan">Rp 0</div></div>
+                </div>
+                <div class="stat-card danger">
+                    <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                    <div><h3>Saldo Kas</h3><div class="stat-number" id="statSaldo">Rp 0</div></div>
+                </div>
+                <div class="stat-card info" onclick="document.querySelector('[data-page=pengeluaran]').click();">
+                    <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+                    <div><h3>Total Pengeluaran</h3><div class="stat-number" id="statPengeluaran">Rp 0</div></div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Selamat datang, Admin!</h3>
+                <p>Gunakan menu di samping untuk mengelola data Masjid Al-Khotib.</p>
+            </div>
+        </div>
+
+        <div id="program" class="page">
+            <div class="page-header">
+                <h2>Kelola Program & Kajian Rutin</h2>
+                <button class="btn btn-primary" id="addProgramBtn"><i class="fas fa-plus"></i> Tambah Program</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Nama Program</th><th>Tipe</th><th>Jadwal</th><th>Ustadz/Imam</th><th>Aksi</th></tr></thead>
+                <tbody id="programTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="programModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="programModalTitle">Tambah Program</h3><button class="close-modal">&times;</button></div>
+                    <form id="programForm">
+                        <div class="form-group"><label>Nama Program</label><input type="text" id="programNama" required></div>
+                        <div class="form-group"><label>Deskripsi</label><textarea id="programDesc" rows="3" required></textarea></div>
+                        <div class="form-group"><label>Tipe Program</label><select id="programTipe" required><option value="">Pilih Tipe</option><option value="harian">Harian</option><option value="mingguan">Mingguan</option><option value="bulanan">Bulanan</option><option value="khusus">Khusus</option></select></div>
+                        <div class="form-group"><label>Jadwal</label><input type="text" id="programJadwal" placeholder="Contoh: Senin ba'da Isya" required></div>
+                        <div class="form-group"><label>Tempat</label><input type="text" id="programTempat" required></div>
+                        <div class="form-group"><label>Nama Ustadz/Imam</label><input type="text" id="programUstadz" placeholder="Nama pengajar/pemimpin kegiatan" required></div>
+                        <div class="form-group"><label>Icon (gunakan Font Awesome class, misal: fas fa-book-open)</label><input type="text" id="programIcon" placeholder="fas fa-book-open" value="fas fa-mosque"></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('programModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="berita" class="page">
+            <div class="page-header">
+                <h2>Kelola Berita</h2>
+                <button class="btn btn-primary" id="addBeritaBtn"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+                <tbody id="beritaTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="beritaModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="beritaModalTitle">Tambah Berita</h3><button class="close-modal">&times;</button></div>
+                    <form id="beritaForm">
+                        <div class="form-group"><label>Judul</label><input type="text" id="beritaJudul" required></div>
+                        <div class="form-group"><label>Isi</label><textarea id="beritaIsi" rows="4" required></textarea></div>
+                        <div class="form-group"><label>Upload Foto</label><input type="file" id="beritaFoto" accept="image/*"></div>
+                        <div class="form-group"><label>Kategori</label><select id="beritaKategori" required><option value="">Pilih</option><option value="Berita Umum">Berita Umum</option><option value="Kajian">Kajian</option><option value="Acara">Acara</option></select></div>
+                        <div class="form-group"><label>Tanggal</label><input type="date" id="beritaTanggal" required></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('beritaModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="galeri" class="page">
+            <div class="page-header">
+                <h2>Kelola Galeri Foto</h2>
+                <button class="btn btn-primary" id="addGaleriBtn"><i class="fas fa-plus"></i> Tambah Foto</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Foto</th><th>Judul</th><th>Deskripsi</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+                <tbody id="galeriTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="galeriModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="galeriModalTitle">Tambah Foto Galeri</h3><button class="close-modal">&times;</button></div>
+                    <form id="galeriForm">
+                        <div class="form-group"><label>Judul Foto</label><input type="text" id="galeriJudul" required></div>
+                        <div class="form-group"><label>Deskripsi</label><textarea id="galeriDeskripsi" rows="3" required></textarea></div>
+                        <div class="form-group"><label>Upload Foto</label><input type="file" id="galeriFoto" accept="image/*" required></div>
+                        <div class="form-group"><label>Tanggal</label><input type="date" id="galeriTanggal" required></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('galeriModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="pengurus" class="page">
+            <div class="page-header">
+                <h2>Kelola Pengurus</h2>
+                <button class="btn btn-primary" id="addPengurusBtn"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Nama</th><th>Jabatan</th><th>Kontak</th><th>Aksi</th></tr></thead>
+                <tbody id="pengurusTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="pengurusModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="pengurusModalTitle">Tambah Pengurus</h3><button class="close-modal">&times;</button></div>
+                    <form id="pengurusForm">
+                        <div class="form-group"><label>Nama</label><input type="text" id="pengurusNama" required></div>
+                        <div class="form-group"><label>Jabatan</label><input type="text" id="pengurusJabatan" required></div>
+                        <div class="form-group"><label>Kontak</label><input type="text" id="pengurusKontak" placeholder="081234567890"></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('pengurusModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="inventaris" class="page">
+            <div class="page-header">
+                <h2>Inventaris Barang</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-primary" id="addInventarisBtn"><i class="fas fa-plus"></i> Tambah</button>
+                    <button class="btn btn-secondary" id="exportInventarisPdfBtn"><i class="fas fa-file-pdf"></i> Ekspor PDF</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Nama Barang</th><th>Jumlah</th><th>Kondisi</th><th>Lokasi</th><th>Aksi</th></tr></thead>
+                <tbody id="inventarisTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="inventarisModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="inventarisModalTitle">Tambah Barang</h3><button class="close-modal">&times;</button></div>
+                    <form id="inventarisForm">
+                        <div class="form-group"><label>Nama Barang</label><input type="text" id="inventarisNama" required></div>
+                        <div class="form-group"><label>Jumlah</label><input type="number" id="inventarisJumlah" required></div>
+                        <div class="form-group"><label>Kondisi</label><select id="inventarisKondisi" required><option value="">Pilih</option><option value="Baik">Baik</option><option value="Cukup">Cukup</option><option value="Rusak">Rusak</option></select></div>
+                        <div class="form-group"><label>Lokasi</label><input type="text" id="inventarisLokasi" required></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('inventarisModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="pemasukan" class="page">
+            <div class="page-header">
+                <h2>Input Pemasukan</h2>
+                <button class="btn btn-primary" id="addPemasukanBtn"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Kategori</th><th>Nominal</th><th>Tanggal</th><th>Keterangan</th><th>Aksi</th></tr></thead>
+                <tbody id="pemasukanTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="pemasukanModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="pemasukanModalTitle">Tambah Pemasukan</h3><button class="close-modal">&times;</button></div>
+                    <form id="pemasukanForm">
+                        <div class="form-group"><label>Kategori</label><select id="pemasukanKategori" required><option value="">Pilih</option><option value="Donasi">Donasi</option><option value="Infaq">Infaq</option><option value="Lainnya">Lainnya</option></select></div>
+                        <div class="form-group"><label>Nominal (Rp)</label><input type="number" id="pemasukanNominal" required></div>
+                        <div class="form-group"><label>Tanggal</label><input type="date" id="pemasukanTanggal" required></div>
+                        <div class="form-group"><label>Keterangan</label><textarea id="pemasukanKeterangan" rows="2"></textarea></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('pemasukanModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="pengeluaran" class="page">
+            <div class="page-header">
+                <h2>Input Pengeluaran</h2>
+                <button class="btn btn-primary" id="addPengeluaranBtn"><i class="fas fa-plus"></i> Tambah</button>
+            </div>
+            <div class="table-container">
+                <table class="data-table"><thead><tr><th>No</th><th>Kategori</th><th>Nominal</th><th>Tanggal</th><th>Keterangan</th><th>Aksi</th></tr></thead>
+                <tbody id="pengeluaranTableBody"></tbody></table>
+            </div>
+            <div class="modal" id="pengeluaranModal">
+                <div class="modal-content">
+                    <div class="modal-header"><h3 id="pengeluaranModalTitle">Tambah Pengeluaran</h3><button class="close-modal">&times;</button></div>
+                    <form id="pengeluaranForm">
+                        <div class="form-group"><label>Kategori</label><select id="pengeluaranKategori" required><option value="">Pilih</option><option value="Operasional">Operasional</option><option value="Perawatan">Perawatan</option><option value="Gaji">Gaji</option><option value="Lainnya">Lainnya</option></select></div>
+                        <div class="form-group"><label>Nominal (Rp)</label><input type="number" id="pengeluaranNominal" required></div>
+                        <div class="form-group"><label>Tanggal</label><input type="date" id="pengeluaranTanggal" required></div>
+                        <div class="form-group"><label>Keterangan</label><textarea id="pengeluaranKeterangan" rows="2"></textarea></div>
+                        <div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('pengeluaranModal')">Batal</button><button type="submit" class="btn btn-primary">Simpan</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="laporan" class="page">
+            <div class="page-header">
+                <h2>Laporan Keuangan</h2>
+                <button class="btn btn-primary" id="exportPdfBtn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+            </div>
+            <div class="chart-card" style="margin-bottom: 2rem;">
+                <h3>Ringkasan Keuangan</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div style="padding: 1.5rem; background: rgba(201, 153, 58, 0.1); border-radius: 12px;">
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Total Pemasukan</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #2d8a5e;" id="totalPemasukan">Rp 0</div>
+                    </div>
+                    <div style="padding: 1.5rem; background: #fef2f2; border-radius: 12px;">
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Total Pengeluaran</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #dc2626;" id="totalPengeluaran">Rp 0</div>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(45, 138, 94, 0.1); border-radius: 12px;">
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Saldo Akhir</div>
+                        <div style="font-size: 2rem; font-weight: 700; color: #c9993a;" id="saldoAkhir">Rp 0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <h3 style="margin-bottom: 1rem;">Detail Transaksi</h3>
+                <table class="data-table"><thead><tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Nominal</th><th>Keterangan</th></tr></thead>
+                <tbody id="laporanTableBody"></tbody></table>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>
